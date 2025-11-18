@@ -37,10 +37,10 @@ CV_FOLDS = 5
 # 1) LOAD
 try:
     df = pd.read_csv(DATA_PATH)
-    print("✅ Loaded dataset shape:", df.shape)
+    print(" Loaded dataset shape:", df.shape)
     display(df.head())
 except FileNotFoundError:
-    print(f"❌ Error: File not found at {DATA_PATH}")
+    print(f" Error: File not found at {DATA_PATH}")
     print("Please check the file path and ensure the CSV exists.")
     raise
 
@@ -166,8 +166,8 @@ cv = StratifiedKFold(n_splits=CV_FOLDS, shuffle=True, random_state=RANDOM_STATE)
 grid = GridSearchCV(pipe, param_grid, cv=cv, scoring='roc_auc', n_jobs=-1, verbose=1)
 grid.fit(X_train, y_train)
 
-print("\n✅ Best params:", grid.best_params_)
-print("✅ Best CV ROC AUC:", grid.best_score_)
+print("\n Best params:", grid.best_params_)
+print(" Best CV ROC AUC:", grid.best_score_)
 
 best_model = grid.best_estimator_
 
@@ -279,11 +279,11 @@ plt.show()
 try:
     with open(MODEL_PATH, 'wb') as f:
         pickle.dump(best_model, f, protocol=pickle.HIGHEST_PROTOCOL)
-    print(f"\n✅ Model saved successfully to '{MODEL_PATH}'")
+    print(f"\n Model saved successfully to '{MODEL_PATH}'")
 except Exception as e:
-    print(f"❌ Error saving model: {str(e)}")
+    print(f" Error saving model: {str(e)}")
 
-print("\n✅ Done. Script completed.")
+print("\n Done. Script completed.")
 
 import pandas as pd
 from sklearn.model_selection import train_test_split
